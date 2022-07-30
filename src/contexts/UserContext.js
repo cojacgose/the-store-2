@@ -1,13 +1,28 @@
-import {createContext} from 'react';
+import {createContext, useState} from 'react';
 
 const UserContext = createContext();
 
-//Here we will have a User object, which will include Email, First Name, Last Name, Password, Address, Saved Billing information - we can use this object to verify login, and when login is verified, we can optionally auto-fill the checkout form
-//We will also store the User's Cart in here (perhaps as part of the user object?) - this is to reflect how data might be packaged from a server
+const User = {
+    firstName: "Waldo",
+    lastName: "Faldo",
+    email: "waldofaldo@gmail.com",
+    password: "TGIF",
+    address: "123 E Waldo St",
+    state: "Illonois",
+    city: "Chicago",
+    creditcard: 8888888888888888,
+    cart:[]
+}
 
 export function UserProvider({children}){
+    const [user,setUser] = useState(User);
+    const [isLoggedIn,setIsLoggedIn] = useState(false);
+
+    console.log(user)
     //We can add state variables here that can now be passed to the children
     return (
-        <UserContext.Provider value={null}>{children}</UserContext.Provider>
+        <UserContext.Provider value={{user, setUser, isLoggedIn, setIsLoggedIn}}>{children}</UserContext.Provider>
     )
 }
+
+export default UserContext;
