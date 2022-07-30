@@ -6,7 +6,7 @@ import ReactModal from "react-modal";
 
 export default function LoginButton(props){
 
-    const{setIsLoggedIn} = useContext(UserContext);
+    
     const{isLoggedIn} = useContext(UserContext);
 
     const[loginModalOpen,setLoginModalOpen]=useState(false);
