@@ -18,7 +18,6 @@ export function UserProvider({children}){
     const [user,setUser] = useState(User);
     const [isLoggedIn,setIsLoggedIn] = useState(false);
 
-    console.log(user)
     //We can add state variables here that can now be passed to the children
     return (
         <UserContext.Provider value={{user, setUser, isLoggedIn, setIsLoggedIn}}>{children}</UserContext.Provider>
