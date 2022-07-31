@@ -16,19 +16,18 @@ export default function ProductCard(props){
     useEffect(()=>{setItemDetails(props.details)},[props.details])
 
     function AddToCart(){
-        //here we need to add it to cart!
-        if(user.cart.some(element=>{
+        if(user.cart.some(element=>{ //checks to see if that type of item is already in the cart
             if(element.item.id === itemDetails.id){
                 return true;
             }
             return false;
         })){
-            for(let i=0;i<user.cart.length;i++){
+            for(let i=0;i<user.cart.length;i++){ //if the item is in the cart, we will increase its count by 1
                 if(itemDetails.id === user.cart[i].item.id){
                     user.cart[i].count++;
                 }
             }
-        }else{
+        }else{ //if the item is not in the cart, then we will add it as an object which contains the item and count
             let obj = {
                 item: itemDetails,
                 count: 1
