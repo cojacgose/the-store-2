@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import UserContext from "../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 
 const BorderDiv = styled.div`
@@ -15,7 +16,7 @@ export default function ProductCard(props){
     
     useEffect(()=>{setItemDetails(props.details)},[props.details])
 
-    function AddToCart(){
+    function AddToCart(){ //ideally this function would be moved somewhere else to be reusable <-candidate for custom hook
         if(user.cart.some(element=>{ //checks to see if that type of item is already in the cart
             if(element.item.id === itemDetails.id){
                 return true;
@@ -37,11 +38,17 @@ export default function ProductCard(props){
         console.log(user.cart)
     }
 
+    const navTo = useNavigate();
+
+    function productClick(pid){
+        navTo(`/productdetails/${pid}`)
+    }
+
     return(
         <BorderDiv>
             <h3>{props.title}</h3>
             <span>{props.price}</span>
-            <button>PRODUCT DETAILS</button>
+            <button key={props.details.id} onClick={()=>productClick(props.details.id)}>PRODUCT DETAILS</button>
             <button onClick={()=>AddToCart()}>QUICK ADD</button>
         </BorderDiv>
     )

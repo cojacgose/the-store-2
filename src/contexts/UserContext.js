@@ -2,7 +2,7 @@ import {createContext, useState} from 'react';
 
 const UserContext = createContext();
 
-const User = {
+const Waldo = {
     firstName: "Waldo",
     lastName: "Faldo",
     email: "waldofaldo@gmail.com",
@@ -15,7 +15,7 @@ const User = {
 }
 
 export function UserProvider({children}){
-    const [user,setUser] = useState(User);
+    const [user,setUser] = useState(Waldo);
     const [isLoggedIn,setIsLoggedIn] = useState(false);
     const [currentItem,setCurrentItem] = useState([]);
 
