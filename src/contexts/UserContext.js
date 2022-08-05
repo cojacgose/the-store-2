@@ -51,7 +51,7 @@ export function UserProvider({children}){
         })){
             for(let i=0;i<user.cart.length;i++){ //if the item is in the cart, we will increase its count by 1
                 if(item.id === user.cart[i].item.id){
-                    user.cart[i].count = (user.cart[i].count - 1)
+                    user.cart.pop(user.cart[i])
                 }
             }
         }

@@ -8,7 +8,7 @@ const HeaderDiv =styled.div`
     justify-content: space-evenly;
     align-items: center;
     background-color: lightcyan;
-    border-top:coral solid 10px;
+    border-top:coral solid 5px;
     border-bottom:coral solid 10px;
 `
 

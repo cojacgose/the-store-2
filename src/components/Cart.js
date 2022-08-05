@@ -17,28 +17,32 @@ export default function Cart(props){
         setCartTotal(total)
     },[cartTotal,user.cart])
 
-    if(user.cart.length>0){
-        return(
-            <div>
-            {user.cart.map(i=>{
-                return(
-                    <div>
-                        <CartCard
-                            title={i.item.title}
-                            price={i.item.price}
-                            count={i.count}
-                            item={i}
-                        />
-                    </div>
-                )
-            })}
-                <div>Subtotal is: {cartTotal}</div>
-                <NavLink to='/checkout'>CEHCKOUT</NavLink>
-            </div>
-        )
-    }else{
-        return(
-            <div>CART IS EMPTY</div>
-        )
+    function mapCart(){
+        if(user.cart.length>0){
+            return(
+                <div>
+                {user.cart.map(i=>{
+                    return(
+                        <div>
+                            <CartCard
+                                title={i.item.title}
+                                price={i.item.price}
+                                count={i.count}
+                                item={i}
+                            />
+                        </div>
+                    )
+                })}
+                    <div>Subtotal is: {cartTotal}</div>
+                    <NavLink to='/checkout'>CEHCKOUT</NavLink>
+                </div>
+            )
+        }else{
+            return(
+                <div>CART IS EMPTY</div>
+            )
+        }
     }
+
+   return(mapCart());
 }

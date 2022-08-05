@@ -4,6 +4,17 @@ import UserContext from "../contexts/UserContext";
 import { useEffect } from "react";
 import {useNavigate} from 'react-router-dom'
 import CheckoutList from "./checkout/CheckoutList";
+import styled from "styled-components";
+
+const CheckoutDiv = styled.div`
+`
+
+const CoolForm = styled.form`
+    display:flex;
+    flex-direction:column;
+    align-items: flex-end;
+`
+
 export default function Checkout(props){
 
     const {user} = useContext(UserContext);
@@ -71,14 +82,14 @@ export default function Checkout(props){
     };
 
     return (
-        <div>
+        <CheckoutDiv>
 
             <div>
                 <div>USED SAVED INFO?</div>
                 <button onClick={()=>setUseLoginInfo(true)}>YES</button>
                 <button onClick={()=>setUseLoginInfo(false)}>NO</button>
             </div>
-            <form onSubmit={handleSubmit}>
+            <CoolForm onSubmit={handleSubmit}>
                 <label>
                     First Name:
                     <input
@@ -146,9 +157,9 @@ export default function Checkout(props){
                     type="submit"
                     value="Confirm Order"
                 />
-            </form>
+            </CoolForm>
             <CheckoutList list={user.cart}></CheckoutList>
             <div>CART TOTAL IS: {cartTotal}</div>
-        </div>
+        </CheckoutDiv>
     )
 }

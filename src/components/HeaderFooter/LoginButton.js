@@ -9,8 +9,10 @@ export default function LoginButton(props){
 
     
     const{isLoggedIn} = useContext(UserContext);
+    const{user} = useContext(UserContext);
 
     const[loginModalOpen,setLoginModalOpen]=useState(false);
+
 
     if(isLoggedIn === false && loginModalOpen === false){
         return(
@@ -30,7 +32,9 @@ export default function LoginButton(props){
         )
     }else{
         return(
-            <div>YOU ARE LOGGED IN</div>
+            <div>
+            <div>HELLO, {user.firstName}, YOU ARE LOGGED IN</div>
+            </div>
         )
     }
 }
