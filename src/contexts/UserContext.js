@@ -11,7 +11,8 @@ const Waldo = {
     state: "Illonois",
     city: "Chicago",
     creditcard: 8888888888888888,
-    cart:[]
+    cart:[],
+    previousOrders:[]
 }
 
 export function UserProvider({children}){
@@ -21,7 +22,7 @@ export function UserProvider({children}){
 
     //We can add state variables here that can now be passed to the children
     return (
-        <UserContext.Provider value={{user, setUser, isLoggedIn, setIsLoggedIn}}>{children}</UserContext.Provider>
+        <UserContext.Provider value={{user, setUser, isLoggedIn, setIsLoggedIn, currentItem, setCurrentItem}}>{children}</UserContext.Provider>
     )
 }
 

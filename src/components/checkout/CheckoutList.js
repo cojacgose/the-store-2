@@ -1,5 +1,5 @@
 export default function CheckoutList(props){
-
+    
     return (
         props.list.map(item=>{
             return(

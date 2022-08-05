@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useContext } from "react";
 import UserContext from "../contexts/UserContext";
 import { useEffect } from "react";
+import {useNavigate} from 'react-router-dom'
 import CheckoutList from "./checkout/CheckoutList";
-
 export default function Checkout(props){
 
     const {user} = useContext(UserContext);
@@ -18,13 +18,57 @@ export default function Checkout(props){
     const[city,setCity]=useState();
     const[cardNumber,setCardNumber]=useState();
 
-    function handleSubmit(){
+    const navTo = useNavigate();
+    
 
+    useEffect(()=>{
+        if(useLoginInfo){
+            setFirstName(user.firstName);
+            setLastName(user.lastName);
+            setEmail(user.email);
+            setAddress(user.address);
+            setUsState(user.state);
+            setCity(user.city);
+            setCardNumber(user.creditcard);
+        }else{
+            setFirstName(null);
+            setLastName(null);
+            setEmail(null);
+            setAddress(null);
+            setUsState(null);
+            setCity(null);
+            setCardNumber(null); 
+        }
+    },[useLoginInfo])
+
+    function handleSubmit(e){
+        e.preventDefault();
+        let order = {
+            cart: user.cart,
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            address: address,
+            usState: usState,
+            city: city,
+            cardNumber: cardNumber
+        };
+        user.previousOrders.push(order);
+        alert("YOUR ORDER HAD BEEN SUBMITTED");
+        console.log("PREVIOUS ORDERS:", user.previousOrders)
+        user.cart = [];
+        navTo('/')
     };
 
     return (
         <div>
-            <form>
+
+            <div>
+                <div>USED SAVED INFO?</div>
+                <button onClick={()=>setUseLoginInfo(true)}>YES</button>
+                <button onClick={()=>setUseLoginInfo(false)}>NO</button>
+            </div>
+            <form onSubmit={handleSubmit}>
                 <label>
                     First Name:
                     <input
@@ -39,7 +83,7 @@ export default function Checkout(props){
                     <input
                         name="lastName"
                         type="text"
-                        value={lastName}
+                        defaultValue={lastName}
                         onChange={(e)=>{setLastName(e.target.value)}}
                     />
                 </label>
@@ -48,7 +92,7 @@ export default function Checkout(props){
                     <input
                         name="email"
                         type="email"
-                        value={email}
+                        defaultValue={email}
                         onChange={(e)=>{setEmail(e.target.value)}}
                     />
                 </label>
@@ -57,7 +101,7 @@ export default function Checkout(props){
                     <input
                         name="address"
                         type="text"
-                        value={address}
+                        defaultValue={address}
                         onChange={(e)=>{setAddress(e.target.value)}}
                     />
                 </label>
@@ -66,7 +110,7 @@ export default function Checkout(props){
                     <input
                         name="usState"
                         type="text"
-                        value={usState}
+                        defaultValue={usState}
                         onChange={(e)=>{setUsState(e.target.value)}}
                     />
                 </label>
@@ -75,7 +119,7 @@ export default function Checkout(props){
                     <input
                         name="city"
                         type="text"
-                        value={city}
+                        defaultValue={city}
                         onChange={(e)=>{setCity(e.target.value)}}
                     />
                 </label>
@@ -84,12 +128,15 @@ export default function Checkout(props){
                     <input
                         name="cardNumber"
                         type="number"
-                        value={cardNumber}
+                        defaultValue={cardNumber}
                         onChange={(e)=>{setCardNumber(e.target.value)}}
                     />
                 </label>
+                <input
+                    type="submit"
+                    value="Confirm Order"
+                />
             </form>
-            <button onClick={()=>handleSubmit}>SUBMIT ORDER</button> {/*does this need to be a input with type submit?? Function will pass information into a modal, maybe save to previous orders for user*/}
             <CheckoutList list={user.cart}></CheckoutList>
         </div>
     )

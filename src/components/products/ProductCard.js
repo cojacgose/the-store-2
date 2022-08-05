@@ -4,7 +4,6 @@ import { useContext } from "react";
 import UserContext from "../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 
-
 const BorderDiv = styled.div`
     border-top:5px solid #C72D7A;
 `
@@ -12,7 +11,8 @@ const BorderDiv = styled.div`
 export default function ProductCard(props){
 
     const[itemDetails,setItemDetails]=useState([]);
-    const{user}=useContext(UserContext);
+    const{user} = useContext(UserContext);
+    const{setCurrentItem} = useContext(UserContext);
     
     useEffect(()=>{setItemDetails(props.details)},[props.details])
 
@@ -41,7 +41,8 @@ export default function ProductCard(props){
     const navTo = useNavigate();
 
     function productClick(pid){
-        navTo(`/productdetails/${pid}`)
+        setCurrentItem(props.details);
+        navTo(`/productdetails/${pid}`);
     }
 
     return(
