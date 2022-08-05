@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ProductCard from "./products/ProductCard";
+import styled from "styled-components";
 
 export default function Products(props){
 

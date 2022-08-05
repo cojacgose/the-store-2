@@ -7,23 +7,24 @@ import ProductDetails from './components/ProductDetails';
 import Checkout from './components/Checkout';
 import Cart from './components/Cart';
 import HeaderFooter from './components/HeaderFooter';
+import MainBody from './components/MainBody';
 
 function App() {
   return (
     <div>
     <UserProvider>
-    <ThemeProvider>
       <BrowserRouter>
       <Routes>
         <Route path ='/' element={<HeaderFooter/>}>
+          <Route path='/' element={<MainBody/>}>
           <Route index element={<Products/>}></Route>
           <Route path = 'productdetails/:id' element={<ProductDetails/>}></Route>
           <Route path = 'cart' element={<Cart/>} ></Route>
           <Route path = 'checkout' element={<Checkout/>}></Route>
+          </Route>
         </Route>
       </Routes>
       </BrowserRouter>
-    </ThemeProvider>
     </UserProvider>
     </div>
   );

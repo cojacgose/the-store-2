@@ -18,8 +18,17 @@ export default function Checkout(props){
     const[city,setCity]=useState();
     const[cardNumber,setCardNumber]=useState();
 
+    const[cartTotal,setCartTotal] = useState(0);
+
     const navTo = useNavigate();
     
+    useEffect(()=>{
+        let total = 0;
+        for(let i=0;i<user.cart.length;i++){
+            total = total + (user.cart[i].item.price * user.cart[i].count)
+        }
+        setCartTotal(total)
+    },[cartTotal,user.cart])
 
     useEffect(()=>{
         if(useLoginInfo&&isLoggedIn){
@@ -139,6 +148,7 @@ export default function Checkout(props){
                 />
             </form>
             <CheckoutList list={user.cart}></CheckoutList>
+            <div>CART TOTAL IS: {cartTotal}</div>
         </div>
     )
 }

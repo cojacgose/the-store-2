@@ -3,6 +3,7 @@ import {useContext} from "react";
 import { useState } from "react";
 import LoginModal from "./LoginModal";
 import ReactModal from "react-modal";
+import { CoolButton } from "../StyledComponents";
 
 export default function LoginButton(props){
 
@@ -14,7 +15,7 @@ export default function LoginButton(props){
     if(isLoggedIn === false && loginModalOpen === false){
         return(
             <div>
-                <button onClick={()=>setLoginModalOpen(true)}>LOGIN</button>
+                <CoolButton onClick={()=>setLoginModalOpen(true)}>LOGIN</CoolButton>
             </div>
         )
     }else if(loginModalOpen === true){

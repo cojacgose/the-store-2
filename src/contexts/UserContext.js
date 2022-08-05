@@ -42,9 +42,24 @@ export function UserProvider({children}){
         console.log(user.cart)
     }
 
+    function RemoveFromCart(item){
+        if(user.cart.some(element=>{ //checks to see if that type of item is already in the cart
+            if(element.item.id === item.id){
+                return true;
+            }
+            return false;
+        })){
+            for(let i=0;i<user.cart.length;i++){ //if the item is in the cart, we will increase its count by 1
+                if(item.id === user.cart[i].item.id){
+                    user.cart[i].count = (user.cart[i].count - 1)
+                }
+            }
+        }
+    }
+
     //We can add state variables here that can now be passed to the children
     return (
-        <UserContext.Provider value={{user, setUser, isLoggedIn, setIsLoggedIn, currentItem, setCurrentItem, AddToCart}}>{children}</UserContext.Provider>
+        <UserContext.Provider value={{user, setUser, isLoggedIn, setIsLoggedIn, currentItem, setCurrentItem, AddToCart, RemoveFromCart}}>{children}</UserContext.Provider>
     )
 }
 
