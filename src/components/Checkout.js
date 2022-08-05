@@ -7,7 +7,7 @@ import CheckoutList from "./checkout/CheckoutList";
 export default function Checkout(props){
 
     const {user} = useContext(UserContext);
-    const isLoggedIn = useContext(UserContext);
+    const {isLoggedIn} = useContext(UserContext);
     const[useLoginInfo,setUseLoginInfo]=useState(false);
 
     const[firstName,setFirstName]=useState();
@@ -22,7 +22,7 @@ export default function Checkout(props){
     
 
     useEffect(()=>{
-        if(useLoginInfo){
+        if(useLoginInfo&&isLoggedIn){
             setFirstName(user.firstName);
             setLastName(user.lastName);
             setEmail(user.email);
@@ -30,7 +30,8 @@ export default function Checkout(props){
             setUsState(user.state);
             setCity(user.city);
             setCardNumber(user.creditcard);
-        }else{
+        }
+        else{
             setFirstName(null);
             setLastName(null);
             setEmail(null);
@@ -39,7 +40,7 @@ export default function Checkout(props){
             setCity(null);
             setCardNumber(null); 
         }
-    },[useLoginInfo])
+    },[useLoginInfo,isLoggedIn])
 
     function handleSubmit(e){
         e.preventDefault();

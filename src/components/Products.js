@@ -4,8 +4,6 @@ import ProductCard from "./products/ProductCard";
 
 export default function Products(props){
 
-    
-
     const[isLoading,setIsLoading] = useState(false);
     const[items,setItems] = useState([]);
 
@@ -21,14 +19,13 @@ export default function Products(props){
         getItems();
     },[])
 
-
-    
     return (
         items.map(i=>{
             return(
                 <div>
                     <ProductCard
                         title={i.title}
+                        image={i.image}
                         price={i.price}
                         details={i}
                     />

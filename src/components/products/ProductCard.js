@@ -13,30 +13,9 @@ export default function ProductCard(props){
     const[itemDetails,setItemDetails]=useState([]);
     const{user} = useContext(UserContext);
     const{setCurrentItem} = useContext(UserContext);
+    const{AddToCart} = useContext(UserContext);
     
     useEffect(()=>{setItemDetails(props.details)},[props.details])
-
-    function AddToCart(){ //ideally this function would be moved somewhere else to be reusable <-candidate for custom hook
-        if(user.cart.some(element=>{ //checks to see if that type of item is already in the cart
-            if(element.item.id === itemDetails.id){
-                return true;
-            }
-            return false;
-        })){
-            for(let i=0;i<user.cart.length;i++){ //if the item is in the cart, we will increase its count by 1
-                if(itemDetails.id === user.cart[i].item.id){
-                    user.cart[i].count++;
-                }
-            }
-        }else{ //if the item is not in the cart, then we will add it as an object which contains the item and count
-            let obj = {
-                item: itemDetails,
-                count: 1
-            }
-            user.cart.push(obj);
-        }
-        console.log(user.cart)
-    }
 
     const navTo = useNavigate();
 
@@ -49,8 +28,9 @@ export default function ProductCard(props){
         <BorderDiv>
             <h3>{props.title}</h3>
             <span>{props.price}</span>
+            <img src={props.image} alt={props.title}/>
             <button key={props.details.id} onClick={()=>productClick(props.details.id)}>PRODUCT DETAILS</button>
-            <button onClick={()=>AddToCart()}>QUICK ADD</button>
+            <button onClick={()=>AddToCart(props.details,1)}>QUICK ADD</button>
         </BorderDiv>
     )
 

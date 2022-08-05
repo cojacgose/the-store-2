@@ -12,9 +12,10 @@ import { NavLink } from "react-router-dom";
 
 export default function Cart(props){
 
-    const[cartTotal,setCartTotal] = useState(0);
+    
     const{user}=useContext(UserContext);
 
+    const[cartTotal,setCartTotal] = useState(0);
     useEffect(()=>{
         let total = 0;
         for(let i=0;i<user.cart.length;i++){

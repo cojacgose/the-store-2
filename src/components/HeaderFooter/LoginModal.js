@@ -8,6 +8,7 @@ export default function LoginModal(props){
 
     const{setIsLoggedIn} = useContext(UserContext);
     const{user} = useContext(UserContext);
+    const{Test} = useContext(UserContext);
 
     //Here we are going to get the login information and compare it to the user's creditials (meaning their email and password) - 
     //if it matches, then we will close the module and set isUserLoggedIn to true. If it doesn't match, we'll return a login failed message.
@@ -19,6 +20,7 @@ export default function LoginModal(props){
     const [loginFail, setLoginFail] = useState("hidden");
 
     function credentialCheck(){ //Compares the form email address to the saved user email addres
+
         if(user.email === userEmail && user.password === userPw){
             setIsLoggedIn(true);
             props.close();
